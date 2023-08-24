@@ -16,7 +16,7 @@ export const FormInput = (props: any) => {
         onChange={onChange}
         onBlur={handleFocus}
         focused={focused.toString()}
-        autocomplete="off"
+        autoComplete="off"
       />
       <span>{errorMessage}</span>
     </div>
