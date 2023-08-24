@@ -1,0 +1,71 @@
+$mobile: 480px
+$ipad: 1024px
+$black: #353535
+$white: #eeeeee
+
+.mortgage-wrapper
+    background-color: white
+    display: flex
+    flex-direction: column
+    padding: 6rem 12rem
+    height: 85vh
+    width:80%
+    margin: auto
+    overflow-x: hidden
+    overflow-y: auto
+
+.calculator-wrapper
+    display: flex
+    justify-content: space-between
+    gap: 8rem
+    margin-top:2rem
+    h2
+        margin-bottom: 1rem
+
+.input-wrapper
+    display: flex
+    flex-direction: column
+    flex:1
+
+    button
+        padding: 1rem
+        margin: 1rem 0
+        background-color: $black
+        color: $white
+        border-radius: 0.25rem 
+        min-width: 50%
+
+.result-wrapper
+    display: flex
+    flex-direction: column
+    flex:1
+    justify-content: center
+    span
+        margin-bottom: 1.25rem
+        font-size: 1.25rem
+
+@media (max-width: $ipad)
+    .calculator-wrapper
+        flex-direction: column
+        gap: 2rem
+    .mortgage-wrapper
+        padding: 3rem 6rem
+        height: 100vh
+    .result-wrapper
+        margin-top: 0
+
+@media (max-width: $mobile)
+    .mortgage-wrapper
+        padding: 2.5rem
+        width:90%
+        h1
+            font-size: 1.35rem
+        h2
+            font-size:0.8rem
+        label
+            font-size: 1rem
+
+        .input-wrapper
+            button
+                padding: 0.5rem
+        

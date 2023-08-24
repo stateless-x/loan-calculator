@@ -1,8 +1,27 @@
-.formInput span
-    color: red
-    font-size: 0.75rem
-    padding: 0.25rem
-    display: none
-    
+$black: #353535
+$mobile: 480px
+$ipad: 1024px
+ 
+.formInput 
+    position: relative
+    padding-bottom: 1.25rem
+    display: flex
+    flex-direction: column
+
+    label
+        font-size: 1.25rem
+    span
+        color: red
+        font-size: 0.75rem
+        padding: 0.25rem
+        display: none
+    input
+        padding: 0.75rem
+        font-size: 1.25rem
+        border: 1px solid $black
+        border-radius: 0.25rem
+        z-index: 1
+        background-color: transparent 
+
 input:invalid[focused="true"] ~ span
     display: block
