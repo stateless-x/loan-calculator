@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Mortgage } from "../../../../type.d";
+import { MortgageInputs } from "../../../../type.d";
 export async function POST(req: NextRequest) {
-  const data: Mortgage = await req.json();
-  // console.log(data);
-
-  // Your processing here...
+  const data = await req.json();
   const monthlyPayment = computeMonthlyPayment(data);
-  // console.log("monthly payment", monthlyPayment);
   const totalPayment = monthlyPayment * data.term * 12;
   const totalInterest = totalPayment - data.loanAmount;
   return NextResponse.json({
@@ -16,12 +12,12 @@ export async function POST(req: NextRequest) {
   });
 }
 
-function computeMonthlyPayment(data: Mortgage): number {
-  const monthlyRate: number = data.interestRate / 100 / 12;
-  const numberOfPayments: number = data.term * 12;
+function computeMonthlyPayment(data: MortgageInputs): number {
+  const monthlyRate: number = Number(data.interestRate) / 100 / 12;
+  const numberOfPayments: number = Number(data.term) * 12;
   const denominator: number = Math.pow(1 + monthlyRate, numberOfPayments) - 1;
   return (
-    (data.loanAmount *
+    (Number(data.loanAmount) *
       monthlyRate *
       Math.pow(1 + monthlyRate, numberOfPayments)) /
     denominator

@@ -1,8 +1,5 @@
-export type Mortgage = {
-  term: number;
-  loanAmount: number;
-  interestRate: number;
-  monthlyPayment: number;
-  totalPayment: number;
-  totalInterest: number;
-};
+export interface MortgageInputs {
+  loanAmount: string | number;
+  term: string | number;
+  interestRate: string | number;
+}

@@ -1,24 +1,69 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { FormInput } from "../FormInput/page";
 import axios from "axios";
-import {formatNumberWithCommas} from "../../util/utility"
+import { formatNumberWithCommas } from "../../util/utility";
+import { MortgageInputs } from "../../type.d";
+
 const Mortgage = () => {
-  const [loanAmount, setLoanAmount] = useState(1000000);
-  const [term, setTerm] = useState(30);
-  const [interestRate, setInterestRate] = useState(3);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
+  const loanAmountRef = useRef();
+  const termRef = useRef();
+  const rateRef = useRef();
 
+  const [values, setValues] = useState<MortgageInputs>({
+    loanAmount: "",
+    term: "",
+    interestRate: "",
+  });
+
+  const inputs = [
+    {
+      id: 1,
+      name: "loanAmount",
+      type: "text",
+      placeholder: "loan amount",
+      label: "loan amount",
+      refer: loanAmountRef,
+      errorMessage: "This field must be numbers",
+      required: true,
+      pattern: "^[0-9]*$",
+    },
+    {
+      id: 2,
+      name: "term",
+      type: "text",
+      placeholder: "term",
+      label: "term",
+      refer: termRef,
+      errorMessage: "This field must be numbers",
+      required: true,
+      pattern: "^[0-9]*$",
+    },
+    {
+      id: 3,
+      name: "interestRate",
+      type: "text",
+      placeholder: "interest rate",
+      label: "Interest Rate",
+      refer: rateRef,
+      errorMessage: "This field must be numbers",
+      required: true,
+      pattern: "^[0-9]*$",
+    },
+  ];
+
+  const onChange = (e: any) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  console.log(values);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = {
-      loanAmount: loanAmount,
-      term: term,
-      interestRate: interestRate,
-    };
     try {
-      const res = await axios.post("/api/calculator/mortgage", data);
+      const res = await axios.post("/api/calculator/mortgage", values);
       setMonthlyPayment(res.data.monthlyPayment);
       setTotalInterest(res.data.totalInterest);
       setTotalPayment(res.data.totalPayment);
@@ -29,41 +74,24 @@ const Mortgage = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="amount">Loan Amount:</label>
-        <input
-          type="text"
-          name="amount"
-          defaultValue={loanAmount}
-          placeholder="amount"
-          onChange={(e) => {
-            setLoanAmount(Number(e.target.value));
-          }}
-        />
-        <label htmlFor="term">Loan Term:</label>
-        <input
-          type="text"
-          name="term"
-          defaultValue={term}
-          placeholder="term"
-          onChange={(e) => {
-            setTerm(Number(e.target.value));
-          }}
-        />
-        <label htmlFor="rate">Rate:</label>
-        <input
-          type="text"
-          name="rate"
-          defaultValue={interestRate}
-          placeholder="rate"
-          onChange={(e) => setInterestRate(Number(e.target.value))}
-        />
-        <button type="submit">submit</button>
-      </form>
       <div className="result-wrapper">
         <span>Monthly Payment: {formatNumberWithCommas(monthlyPayment)}</span>
         <span>Total Interest: {formatNumberWithCommas(totalInterest)}</span>
         <span>Total Payment: {formatNumberWithCommas(totalPayment)}</span>
+      </div>
+      <div>
+        <h1>Loan Calculator</h1>
+        <form onSubmit={handleSubmit}>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={values[input.name]}
+              onChange={onChange}
+            />
+          ))}
+          <button type="submit">add</button>
+        </form>
       </div>
     </div>
   );
