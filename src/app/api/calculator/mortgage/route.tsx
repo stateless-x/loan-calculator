@@ -2,6 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { MortgageInputs } from "../../../../type.d";
 export async function POST(req: NextRequest) {
   const data = await req.json();
+  if (data) {
+    if (
+      typeof data.term !== "number" ||
+      typeof data.interestRate !== "number" ||
+      typeof data.loanAmount !== "number"
+    ) {
+      return NextResponse.json("Invalid inputs - Please use Numbers", { status: 400, statusText: "invalid URL" });
+    }
+  }
   const monthlyPayment = computeMonthlyPayment(data);
   const totalPayment = monthlyPayment * data.term * 12;
   const totalInterest = totalPayment - data.loanAmount;

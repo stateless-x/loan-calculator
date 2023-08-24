@@ -24,8 +24,8 @@ const Mortgage = () => {
       id: 1,
       name: "loanAmount",
       type: "text",
-      placeholder: "loan amount",
-      label: "loan amount",
+      placeholder: "0",
+      label: "วงเงินที่ขอกู้",
       refer: loanAmountRef,
       errorMessage: "This field must be numbers",
       required: true,
@@ -35,8 +35,8 @@ const Mortgage = () => {
       id: 2,
       name: "term",
       type: "text",
-      placeholder: "term",
-      label: "term",
+      placeholder: "0",
+      label: "ระยะเวลาที่ต้องการผ่อนชำระ",
       refer: termRef,
       errorMessage: "This field must be numbers",
       required: true,
@@ -46,8 +46,7 @@ const Mortgage = () => {
       id: 3,
       name: "interestRate",
       type: "text",
-      placeholder: "interest rate",
-      label: "Interest Rate",
+      label: "อัตราดอกเบี้ย",
       refer: rateRef,
       errorMessage: "This field must be numbers",
       required: true,
@@ -80,7 +79,7 @@ const Mortgage = () => {
         <span>Total Payment: {formatNumberWithCommas(totalPayment)}</span>
       </div>
       <div>
-        <h1>Loan Calculator</h1>
+        <h1>โปรแกรมคำนวณสินเชื่อบ้าน (ผ่อนบ้าน ผ่อนคอนโด)</h1>
         <form onSubmit={handleSubmit}>
           {inputs.map((input) => (
             <FormInput
@@ -90,7 +89,7 @@ const Mortgage = () => {
               onChange={onChange}
             />
           ))}
-          <button type="submit">add</button>
+          <button type="submit">คำนวณเงินกู้</button>
         </form>
       </div>
     </div>
