@@ -20,7 +20,19 @@ const Mortgage = () => {
     interestRate: "",
   });
 
-  const inputs = [
+  type InputName = keyof MortgageInputs;
+
+  const inputs: {
+    id: number;
+    name: InputName;
+    type: string;
+    placeholder?: string;
+    label: string;
+    refer: any;
+    errorMessage: string;
+    required: boolean;
+    pattern: string;
+  }[] = [
     {
       id: 1,
       name: "loanAmount",
@@ -92,15 +104,36 @@ const Mortgage = () => {
         <div className="result-wrapper">
           <span>
             ยอดผ่อนชำระต่อเดือน:
-            <br /> <CountUp className="count-up" start = {0} end={monthlyPayment} duration={1.25}/> บาท
+            <br />{" "}
+            <CountUp
+              className="count-up"
+              start={0}
+              end={monthlyPayment}
+              duration={1.25}
+            />{" "}
+            บาท
           </span>
           <span>
             อัตราดอกเบี้ยที่ต้องชำระทั้งหมด:
-            <br /> <CountUp className="count-up" start = {0} end={totalInterest} duration={1.25}/> บาท
+            <br />{" "}
+            <CountUp
+              className="count-up"
+              start={0}
+              end={totalInterest}
+              duration={1.25}
+            />{" "}
+            บาท
           </span>
           <span>
             ยอดที่ต้องชำระทั้งหมด:
-            <br /> <CountUp className="count-up" start = {0} end={totalPayment} duration={1.25}/> บาท
+            <br />{" "}
+            <CountUp
+              className="count-up"
+              start={0}
+              end={totalPayment}
+              duration={1.25}
+            />{" "}
+            บาท
           </span>
         </div>
       </div>
