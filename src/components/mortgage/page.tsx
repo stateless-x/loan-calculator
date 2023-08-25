@@ -2,7 +2,7 @@
 import { useState, useRef } from "react";
 import { FormInput } from "../FormInput/page";
 import axios from "axios";
-import { formatNumberWithCommas } from "../../util/utility";
+import CountUp from "react-countup";
 import { MortgageInputs } from "../../type.d";
 import "../../styles/mortgage.sass";
 
@@ -92,15 +92,15 @@ const Mortgage = () => {
         <div className="result-wrapper">
           <span>
             ยอดผ่อนชำระต่อเดือน:
-            <br /> <h3>{formatNumberWithCommas(monthlyPayment)}</h3>
+            <br /> <CountUp className="count-up" start = {0} end={monthlyPayment} duration={1.25}/> บาท
           </span>
           <span>
             อัตราดอกเบี้ยที่ต้องชำระทั้งหมด:
-            <br /> <h3>{formatNumberWithCommas(totalInterest)}</h3>
+            <br /> <CountUp className="count-up" start = {0} end={totalInterest} duration={1.25}/> บาท
           </span>
           <span>
             ยอดที่ต้องชำระทั้งหมด:
-            <br /> <h3>{formatNumberWithCommas(totalPayment)}</h3>
+            <br /> <CountUp className="count-up" start = {0} end={totalPayment} duration={1.25}/> บาท
           </span>
         </div>
       </div>
